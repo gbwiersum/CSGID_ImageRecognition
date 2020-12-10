@@ -1,2 +1,2 @@
-# CSGID_ImageRecognition
-A MARCO-based image recognition pipeline for integration with Rigaku Minstrel
+# CSGID
+Development for and by the Center for Structural Genomics of Infectious Diseases
