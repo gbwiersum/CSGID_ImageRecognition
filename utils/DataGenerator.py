@@ -1,6 +1,5 @@
 from functools import partial
 import tensorflow as tf
-from ImageRecognition.utils.Inceptionv4 import create_model
 
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 classes = 1001

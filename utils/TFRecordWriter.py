@@ -46,15 +46,13 @@ def tfrecord_writer(filepath, label=5):
     return tf.train.Example(features=tf.train.Features(feature=feature))
 
 
-# TODO: Also take sql outputs and pass them to tfrecord_writer
 def plate_to_tfrecord(folder):
     images = glob.glob(folder)
-    wells = images.str.contains("_E0_")
-    # Takes a dict of wells and passes to TFRecord_Writer to save as a file.
-    # TODO: look into interfacing this feature directly with Oracle rather than a folder.
-    plate = dict(zip(list(range(1, len(wells))), wells))
-    with tf.io.TFRecordWriter(folder + '.tfrecord') as writer:
+    wells = [s for s in images if "_E0_" in s]
+    plate = dict(zip(range(1, len(wells)), wells))
+    with tf.io.TFRecordWriter(folder + 'plate_data.tfrecord') as writer:
         for label, filename in plate.items():
             tf_example = tfrecord_writer(filename, label)
             writer.write(tf_example.SerializeToString())
-    print("wrote " + str(len(wells)) + " files to  " + folder)
+    return str(folder + 'plate_data.tfrecord')
+

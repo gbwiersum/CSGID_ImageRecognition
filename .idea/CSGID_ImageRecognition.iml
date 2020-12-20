@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="PYTHON_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/Minstrel-Screens" />
+      <excludeFolder url="file://$MODULE_DIR$/Models/VanHouek_model" />
+      <excludeFolder url="file://$MODULE_DIR$/HTS-Screens" />
+      <excludeFolder url="file://$MODULE_DIR$/test-jpg" />
+      <excludeFolder url="file://$MODULE_DIR$/train-jpg" />
+    </content>
+    <orderEntry type="jdk" jdkName="Python 3.8 (Crystal_Image_Rec)" jdkType="Python SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PyDocumentationSettings">
+    <option name="format" value="PLAIN" />
+    <option name="myDocStringFormat" value="Plain" />
+  </component>
+  <component name="PyNamespacePackagesService">
+    <option name="namespacePackageFolders">
+      <list>
+        <option value="$MODULE_DIR$" />
+      </list>
+    </option>
+  </component>
+</module>
