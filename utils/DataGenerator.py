@@ -80,28 +80,3 @@ def get_dataset(filenames, im_size, labeled=True, batch_size=10):
     dataset = dataset.prefetch(buffer_size=AUTOTUNE)
     dataset = dataset.batch(batch_size)
     return dataset
-
-
-def tfrecord_writer(filepath, label=None):
-    image_string = open(filepath, 'rb').read()
-    image_shape = tf.image.decode_jpeg(image_string).shape
-    label = label
-    feature = {
-        "image/height": tf.int64(image_shape[0]),  # image height in pixels
-        "image/width": tf.int64(image_shape[1]),  # image width in pixels
-        "image/colorspace": tf.string('RGB'),  # specifying the colorspace, always 'RGB'
-        "image/channels": tf.int64(3),  # specifying the number of channels, always 3
-        "image/class/label": tf.int64(label),  # specifying the index in a normalized classification layer
-        "image/class/raw": tf.int64(label),
-        # specifying the index in the raw (original) classification layer
-        "image/class/source": tf.int64(5),
-        # specifying the index of the source (creator of the image) - CSGID = 5
-        "image/class/text": tf.string(str(label)),
-        # specifying the human-readable version of the normalized label
-        "image/format": tf.string("JPEG"),  # specifying the format, always 'JPEG'
-        "image/filename": tf.string(filepath),  # containing the basename of the image file
-        "image/id": tf.io.VarLenFeature(tf.int64),  # specifying the unique id for the image
-        "image/encoded": tf.string(image_string),  # containing JPEG encoded image in RGB colorspace
-
-    }
-    return tf.train.Example(features=tf.train.Features(feature=feature))

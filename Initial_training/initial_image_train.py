@@ -1,7 +1,6 @@
 # Much of the code used here is based on: https://keras.io/examples/keras_recipes/tfrecord/
 import tensorflow as tf
 from utils.DataGenerator import get_dataset
-from utils.Inceptionv4 import create_model
 import glob
 
 train_list = glob.glob('../train-jpg/*')
@@ -21,9 +20,18 @@ print("Test Files: ", len(test_list))
 train_dataset = get_dataset(train_list, batch_size=BATCH_SIZE, im_size=IMAGE_SIZE)
 valid_dataset = get_dataset(test_list, batch_size=BATCH_SIZE, im_size=IMAGE_SIZE)
 
-model = create_model()
-model.compile(optimizer='adam', loss=tf.keras.losses.binary_crossentropy,
-              metrics=tf.keras.metrics.binary_accuracy)
+model = tf.keras.applications.InceptionV3(
+    include_top=True,
+    weights=None,
+    input_tensor=None,
+    input_shape=None,
+    pooling=None,
+    classes=4,
+    classifier_activation="softmax",
+)
+
+model.compile(optimizer='adam', loss=tf.keras.losses.categorical_crossentropy,
+              metrics=tf.keras.metrics.categorical_accuracy)
 
 model.fit(train_dataset, validation_data=valid_dataset, batch_size=keras_batch_size, epochs=epochs)
 model.save('../Models/Baseline-Model.h5')
